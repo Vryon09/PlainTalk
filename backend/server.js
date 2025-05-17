@@ -1,7 +1,6 @@
 // server.js
 const express = require("express");
 const cors = require("cors");
-const fetch = require("node-fetch");
 const dotenv = require("dotenv");
 const corsOptions = {
   origin: "https://plain-talk.netlify.app",
@@ -71,4 +70,3 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-console.log("✅ Loaded key:", process.env.OPENROUTER_API_KEY);
