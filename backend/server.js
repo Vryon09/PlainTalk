@@ -42,8 +42,7 @@ app.post("/api/explain", async (req, res) => {
       {
         method: "POST",
         headers: {
-          // Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          Authorization: `Bearer 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`,
+          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
           "X-Title": "Simplifier",
         },
