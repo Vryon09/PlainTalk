@@ -28,7 +28,7 @@ const handleExplain = async ({
   console.log(data);
   const message = data.choices?.[0]?.message?.content;
 
-  console.log(message);
+  // console.log(message);
 
   setOutput(message || "No response received.");
 
