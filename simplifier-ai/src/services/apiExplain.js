@@ -14,7 +14,7 @@ const handleExplain = async ({
 
   setOutput("");
 
-  const response = await fetch(`${API_URL}`, {
+  const response = await fetch(`${API_URL}/api/explain`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -27,7 +27,7 @@ const handleExplain = async ({
   console.log("API Response:");
   console.log(data);
   const message = data.choices?.[0]?.message?.content;
-
+  console.log("Tanginaaaa");
   // console.log(message);
 
   setOutput(message || "No response received.");
