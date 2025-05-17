@@ -3,16 +3,11 @@ const express = require("express");
 const cors = require("cors");
 const fetch = require("node-fetch");
 const dotenv = require("dotenv");
-const corsOptions = {
-  origin: "https://plain-talk.netlify.app",
-  methods: "GET,POST",
-  credentials: true,
-};
 
 dotenv.config();
 
 const app = express();
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 app.post("/api/explain", async (req, res) => {
