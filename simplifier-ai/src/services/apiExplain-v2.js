@@ -2,8 +2,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { auth, database } from "./firebase";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 
-const API_URL = import.meta.env.VITE_API_URL;
-
 const handleExplain = async ({
   input,
   setOutput,
@@ -14,7 +12,7 @@ const handleExplain = async ({
 
   setOutput("");
 
-  const response = await fetch(`${API_URL}/api/explain`, {
+  const response = await fetch("http://localhost:3001/api/explain", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
