@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* * {
+  outline: 1px solid lime;
+} */
+
+body {
+  font-family: "Poppins";
+}
