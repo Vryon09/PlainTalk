@@ -65,12 +65,8 @@ app.post("/api/explain", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Simplifier backend is running!");
+  res.send(`Simplifier backend is running!, ${process.env.OPENROUTER_API_KEY}`);
 });
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () =>
-  console.log(
-    `Server running on port ${PORT}, ${process.env.OPENROUTER_API_KEY}`
-  )
-);
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
