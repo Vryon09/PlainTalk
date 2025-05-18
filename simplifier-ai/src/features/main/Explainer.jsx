@@ -61,6 +61,7 @@ function Explainer() {
           <button
             onClick={(e) => {
               e.preventDefault();
+              console.log("test mic");
 
               if (listening) {
                 SpeechRecognition.stopListening();
