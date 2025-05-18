@@ -67,8 +67,12 @@ function Explainer() {
               e.preventDefault();
 
               if (listening) {
-                SpeechRecognition.stopListening();
-                setInput((input) => input + transcript);
+                try {
+                  SpeechRecognition.stopListening();
+                  setInput((input) => input + transcript);
+                } catch (err) {
+                  console.log(err.message);
+                }
                 return;
               }
 
