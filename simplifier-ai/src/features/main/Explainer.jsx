@@ -63,7 +63,7 @@ function Explainer() {
 
         <div className="flex w-full justify-end gap-2">
           <button
-            onClick={(e) => {
+            onClick={async (e) => {
               e.preventDefault();
 
               if (listening) {
@@ -73,7 +73,12 @@ function Explainer() {
               }
 
               resetTranscript();
-              SpeechRecognition.startListening({ continuous: true });
+              // SpeechRecognition.startListening({ continuous: true });
+              try {
+                await SpeechRecognition.startListening({ continuous: true });
+              } catch (err) {
+                console.error("Error starting speech recognition:", err);
+              }
             }}
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
           >
