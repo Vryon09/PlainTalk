@@ -76,9 +76,9 @@ function Explainer() {
                 return;
               }
 
-              resetTranscript();
               // SpeechRecognition.startListening({ continuous: true });
               try {
+                resetTranscript();
                 await SpeechRecognition.startListening({ continuous: true });
               } catch (err) {
                 console.error("Error starting speech recognition:", err);
