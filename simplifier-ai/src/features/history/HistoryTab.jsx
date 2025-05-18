@@ -30,7 +30,7 @@ function HistoryTab({ explained, setHistoryOpen, isMobile }) {
 
   return (
     <div
-      className="group flex h-9 cursor-pointer items-center justify-between rounded-xl bg-neutral-200 p-2 hover:bg-neutral-300"
+      className="group flex h-9 cursor-pointer items-center justify-between rounded-xl bg-neutral-200 p-2 hover:bg-neutral-300 active:bg-neutral-300"
       style={{
         backgroundColor: `${+historyId === explained.id ? "#d4d4d4" : ""}`,
         pointerEvents: `${isDeleting ? "none" : "auto"}`,
@@ -56,7 +56,9 @@ function HistoryTab({ explained, setHistoryOpen, isMobile }) {
 
           setIsOpen(true);
         }}
-        className="hidden h-6 w-6 cursor-pointer items-center justify-center rounded-full transition-all duration-100 group-hover:flex hover:bg-neutral-400"
+        style={isMobile ? { display: "flex" } : {}}
+        // className="hidden h-6 w-6 cursor-pointer items-center justify-center rounded-full transition-all duration-100 group-hover:flex hover:bg-neutral-400"
+        className="hidden h-6 w-6 cursor-pointer items-center justify-center rounded-full transition-all duration-100 group-hover:flex hover:bg-neutral-400 active:bg-neutral-400"
       >
         <X size={14} />
       </button>

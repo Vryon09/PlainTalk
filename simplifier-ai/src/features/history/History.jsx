@@ -39,7 +39,7 @@ function History({ setHistoryOpen, historyOpen, isMobile }) {
 
       <div className="">
         <div
-          className="cursor-pointer rounded-xl p-2 hover:bg-neutral-200"
+          className="cursor-pointer rounded-xl p-2 hover:bg-neutral-200 active:bg-neutral-200"
           onClick={() => {
             if (isMobile) {
               setHistoryOpen(false);

@@ -29,7 +29,7 @@ function Modal({ children, isOpen, onClose, onConfirm }) {
         className="flex flex-col gap-6 rounded-2xl bg-neutral-50 px-4 py-6"
       >
         {children}
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-8">
           <button
             onClick={onClose}
             className="cursor-pointer rounded-lg bg-neutral-300 px-4 py-2 hover:bg-neutral-400"

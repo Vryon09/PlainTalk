@@ -71,7 +71,7 @@ function Explainer() {
               resetTranscript();
               SpeechRecognition.startListening({ continuous: true });
             }}
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700"
+            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
           >
             {!listening && <Mic color="white" size={18} />}
             {listening && <X color="white" size={18} />}
@@ -79,7 +79,7 @@ function Explainer() {
 
           <button
             disabled={isPending || listening}
-            className="cursor-pointer rounded bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700 disabled:cursor-not-allowed"
+            className="cursor-pointer rounded bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700 active:bg-indigo-700 disabled:cursor-not-allowed"
           >
             {isPending ? "Explaining..." : "Explain"}
           </button>
@@ -108,7 +108,7 @@ function Explainer() {
                 const success = handleCopy(output);
                 if (success) toast.success("Copied Successfully!");
               }}
-              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700"
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
             >
               <Copy color="white" size={16} />
             </button>
