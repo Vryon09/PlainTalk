@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export function formattedOutput(result) {
   const res = result
     .split("**")
@@ -24,6 +26,7 @@ export function formattedOutput(result) {
 export async function handleCopy(text) {
   try {
     await navigator.clipboard.writeText(text);
+    return true;
   } catch (err) {
     throw new Error(err);
   }

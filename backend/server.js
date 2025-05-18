@@ -3,7 +3,11 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const corsOptions = {
-  origin: "https://plain-talk.netlify.app",
+  origin: [
+    "https://plain-talk.netlify.app",
+    "http://localhost:5173",
+    "http://192.168.18.9:5173",
+  ],
   methods: "GET,POST",
   credentials: true,
 };

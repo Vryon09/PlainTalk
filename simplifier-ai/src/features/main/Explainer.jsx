@@ -10,6 +10,7 @@ import { useExplain } from "../../services/apiExplain";
 import { auth } from "../../services/firebase";
 import ReactMarkdown from "react-markdown";
 import { handleCopy } from "../../utils/helpers";
+import toast from "react-hot-toast";
 // import { useGoogleSignIn } from "../../services/apiSignin";
 
 function Explainer() {
@@ -104,7 +105,8 @@ function Explainer() {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                handleCopy(output);
+                const success = handleCopy(output);
+                if (success) toast.success("Copied Successfully!");
               }}
               className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700"
             >

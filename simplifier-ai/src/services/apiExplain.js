@@ -3,7 +3,9 @@ import { auth, database } from "./firebase";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 
 const API_URL = import.meta.env.VITE_API_URL;
-
+// https://plaintalk-backend.onrender.com
+// http://localhost:3001
+// http://192.168.18.9:3001
 const handleExplain = async ({
   input,
   setOutput,
@@ -27,7 +29,6 @@ const handleExplain = async ({
   console.log("API Response:");
   console.log(data);
   const message = data.choices?.[0]?.message?.content;
-  console.log("Tanginaaaa");
   // console.log(message);
 
   setOutput(message || "No response received.");

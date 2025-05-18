@@ -5,6 +5,7 @@ import { TailSpin } from "react-loader-spinner";
 import ReactMarkdown from "react-markdown";
 import { handleCopy } from "../../utils/helpers";
 import { Copy } from "lucide-react";
+import toast from "react-hot-toast";
 
 function HistoryItem() {
   const { historyId } = useParams();
@@ -44,7 +45,8 @@ function HistoryItem() {
         <button
           onClick={(e) => {
             e.preventDefault();
-            handleCopy(explained.result);
+            const success = handleCopy(explained.result);
+            if (success) toast.success("Copied Successfully!");
           }}
           className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700"
         >

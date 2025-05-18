@@ -4,6 +4,7 @@ import Main from "./features/main/Main";
 import Home from "./ui/Home";
 import Explainer from "./features/main/Explainer";
 import HistoryItem from "./features/history/HistoryItem";
+import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
@@ -36,6 +37,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
+      <Toaster
+        toastOptions={{
+          success: { duration: 1000 },
+        }}
+        position="top-center"
+      />
     </QueryClientProvider>
   );
 }
