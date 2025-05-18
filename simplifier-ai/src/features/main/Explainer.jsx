@@ -61,13 +61,16 @@ function Explainer() {
           <button
             onClick={(e) => {
               e.preventDefault();
-              console.log("test mic");
+              console.log("test mic1");
 
               if (listening) {
                 SpeechRecognition.stopListening();
                 setInput((input) => input + transcript);
+                console.log("test mic2");
                 return;
               }
+
+              console.log("test mic3");
 
               resetTranscript();
               SpeechRecognition.startListening({ continuous: true });
