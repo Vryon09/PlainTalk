@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { addExplained, getPrevExplained } from "../history/historySlice";
 import { useOutletContext } from "react-router-dom";
@@ -41,6 +41,10 @@ function Explainer() {
     handleExplain({ input, setOutput, historyOpen, setHistoryOpen });
   }
 
+  useEffect(() => {
+    console.log(listening);
+  }, [listening]);
+
   return (
     <>
       <form onSubmit={onExplain} className="mx-auto max-w-2xl space-y-2">
@@ -61,16 +65,12 @@ function Explainer() {
           <button
             onClick={(e) => {
               e.preventDefault();
-              console.log("test mic1");
 
               if (listening) {
                 SpeechRecognition.stopListening();
                 setInput((input) => input + transcript);
-                console.log("test mic2");
                 return;
               }
-
-              console.log("test mic3");
 
               resetTranscript();
               SpeechRecognition.startListening({ continuous: true });
