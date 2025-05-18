@@ -63,23 +63,19 @@ function Explainer() {
 
         <div className="flex w-full justify-end gap-2">
           <button
-            onClick={async (e) => {
+            onClick={(e) => {
               e.preventDefault();
 
-              try {
-                if (listening) {
-                  await SpeechRecognition.stopListening();
-                  setInput((input) => input + transcript);
+              if (listening) {
+                SpeechRecognition.stopListening();
+                setInput((input) => input + transcript);
 
-                  return;
-                }
-
-                // SpeechRecognition.startListening({ continuous: true });
-                resetTranscript();
-                await SpeechRecognition.startListening({ continuous: true });
-              } catch (err) {
-                console.error("Error starting speech recognition:", err);
+                return;
               }
+
+              // SpeechRecognition.startListening({ continuous: true });
+              resetTranscript();
+              SpeechRecognition.startListening({ continuous: true });
             }}
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
           >
