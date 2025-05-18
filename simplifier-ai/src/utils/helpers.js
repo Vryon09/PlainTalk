@@ -1,5 +1,3 @@
-import toast from "react-hot-toast";
-
 export function formattedOutput(result) {
   const res = result
     .split("**")
