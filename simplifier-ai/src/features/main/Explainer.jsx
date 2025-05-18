@@ -66,18 +66,15 @@ function Explainer() {
             onClick={async (e) => {
               e.preventDefault();
 
-              if (listening) {
-                try {
-                  SpeechRecognition.stopListening();
-                  setInput((input) => input + transcript);
-                } catch (err) {
-                  console.log(err.message);
-                }
-                return;
-              }
-
-              // SpeechRecognition.startListening({ continuous: true });
               try {
+                if (listening) {
+                  await SpeechRecognition.stopListening();
+                  setInput((input) => input + transcript);
+
+                  return;
+                }
+
+                // SpeechRecognition.startListening({ continuous: true });
                 resetTranscript();
                 await SpeechRecognition.startListening({ continuous: true });
               } catch (err) {
