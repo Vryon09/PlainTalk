@@ -41,6 +41,21 @@ function Explainer() {
     handleExplain({ input, setOutput, historyOpen, setHistoryOpen });
   }
 
+  async function handleListening(e) {
+    e.preventDefault();
+    try {
+      if (!listening) {
+        resetTranscript();
+        await SpeechRecognition.startListening({ continuous: true });
+      }
+
+      await SpeechRecognition.stopListening();
+      setInput((input) => input + transcript);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
   useEffect(() => {
     console.log(listening);
   }, [listening]);
@@ -63,19 +78,7 @@ function Explainer() {
 
         <div className="flex w-full justify-end gap-2">
           <button
-            onClick={(e) => {
-              e.preventDefault();
-
-              if (!listening) {
-                resetTranscript();
-                SpeechRecognition.startListening({ continuous: true });
-              }
-
-              SpeechRecognition.stopListening();
-              setInput((input) => input + transcript);
-
-              // SpeechRecognition.startListening({ continuous: true });
-            }}
+            onClick={handleListening}
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
           >
             {!listening && <Mic color="white" size={18} />}
