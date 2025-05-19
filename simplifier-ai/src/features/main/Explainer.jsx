@@ -41,24 +41,6 @@ function Explainer() {
     handleExplain({ input, setOutput, historyOpen, setHistoryOpen });
   }
 
-  async function handleStopListening() {
-    try {
-      await SpeechRecognition.stopListening();
-      setInput((input) => input + transcript);
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
-
-  async function handleStartListening() {
-    try {
-      resetTranscript();
-      await SpeechRecognition.startListening({ continuous: true });
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
-
   useEffect(() => {
     console.log(listening);
   }, [listening]);
@@ -85,12 +67,13 @@ function Explainer() {
               e.preventDefault();
 
               if (listening) {
-                handleStopListening();
-                return;
+                SpeechRecognition.stopListening();
+                setInput((input) => input + transcript);
+              } else {
+                // SpeechRecognition.startListening({ continuous: true });
+                resetTranscript();
+                SpeechRecognition.startListening({ continuous: true });
               }
-
-              // SpeechRecognition.startListening({ continuous: true });
-              handleStartListening();
             }}
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
           >
