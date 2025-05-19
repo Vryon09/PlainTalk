@@ -41,21 +41,6 @@ function Explainer() {
     handleExplain({ input, setOutput, historyOpen, setHistoryOpen });
   }
 
-  async function handleListening(e) {
-    e.preventDefault();
-    try {
-      if (!listening) {
-        resetTranscript();
-        await SpeechRecognition.startListening({ continuous: true });
-      }
-
-      await SpeechRecognition.stopListening();
-      setInput((input) => input + transcript);
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
-
   useEffect(() => {
     console.log(listening);
   }, [listening]);
@@ -77,13 +62,48 @@ function Explainer() {
         />
 
         <div className="flex w-full justify-end gap-2">
-          <button
-            onClick={handleListening}
+          {!listening ? (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                resetTranscript();
+                SpeechRecognition.startListening({ continuous: true });
+              }}
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
+            >
+              <Mic color="white" size={18} />
+            </button>
+          ) : (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                SpeechRecognition.stopListening();
+                setInput((input) => input + transcript);
+                return;
+              }}
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
+            >
+              <X color="white" size={18} />
+            </button>
+          )}
+          {/* <button
+            onClick={(e) => {
+              e.preventDefault();
+
+              if (listening) {
+                SpeechRecognition.stopListening();
+                setInput((input) => input + transcript);
+                return;
+              }
+
+              resetTranscript();
+              SpeechRecognition.startListening({ continuous: true });
+            }}
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
           >
             {!listening && <Mic color="white" size={18} />}
             {listening && <X color="white" size={18} />}
-          </button>
+          </button> */}
 
           <button
             disabled={isPending || listening}
