@@ -42,8 +42,11 @@ function Explainer() {
   }
 
   useEffect(() => {
-    console.log(listening);
-  }, [listening]);
+    if (!listening && transcript) {
+      setInput((input) => input + transcript);
+      resetTranscript();
+    }
+  }, [listening, resetTranscript, transcript]);
 
   return (
     <>
@@ -62,47 +65,30 @@ function Explainer() {
         />
 
         <div className="flex w-full justify-end gap-2">
-          {/* {!listening ? (
-            <button
-              onClick={async (e) => {
-                e.preventDefault();
-                resetTranscript();
-                await SpeechRecognition.startListening();
-              }}
-              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
-            >
-              <Mic color="white" size={18} />
-            </button>
-          ) : (
-            <button
-              onClick={async (e) => {
-                e.preventDefault();
-                await SpeechRecognition.stopListening();
-                setInput((input) => input + transcript);
-              }}
-              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
-            >
-              <X color="white" size={18} />
-            </button>
-          )} */}
           <button
-            onClick={async (e) => {
+            // onClick={(e) => {
+            //   e.preventDefault();
+
+            //   if (listening) {
+            //     SpeechRecognition.stopListening();
+            //     setInput((input) => input + transcript);
+            //     return;
+            //   }
+
+            //   resetTranscript();
+            //   SpeechRecognition.startListening({ continuous: true });
+            // }}
+            onClick={(e) => {
               e.preventDefault();
 
               if (listening) {
-                await SpeechRecognition.stopListening();
-
-                // Wait briefly to ensure final transcript is captured
-                setTimeout(() => {
-                  setInput((input) => input + " " + transcript.trim());
-                  resetTranscript(); // Optional: clean up after setting
-                }, 500);
-              } else {
+                SpeechRecognition.stopListening();
                 resetTranscript();
-                SpeechRecognition.startListening({
-                  continuous: true,
-                });
+                return;
               }
+
+              resetTranscript();
+              SpeechRecognition.startListening({ continuous: true });
             }}
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
           >
