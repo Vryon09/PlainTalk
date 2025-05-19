@@ -66,14 +66,15 @@ function Explainer() {
             onClick={(e) => {
               e.preventDefault();
 
-              if (listening) {
-                SpeechRecognition.stopListening();
-                setInput((input) => input + transcript);
-              } else {
-                // SpeechRecognition.startListening({ continuous: true });
+              if (!listening) {
                 resetTranscript();
                 SpeechRecognition.startListening({ continuous: true });
               }
+
+              SpeechRecognition.stopListening();
+              setInput((input) => input + transcript);
+
+              // SpeechRecognition.startListening({ continuous: true });
             }}
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
           >
