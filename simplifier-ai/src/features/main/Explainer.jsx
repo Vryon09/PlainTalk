@@ -67,7 +67,7 @@ function Explainer() {
               onClick={async (e) => {
                 e.preventDefault();
                 resetTranscript();
-                await SpeechRecognition.startListening({ continuous: true });
+                await SpeechRecognition.startListening();
               }}
               className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
             >
