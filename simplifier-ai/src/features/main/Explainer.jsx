@@ -62,7 +62,7 @@ function Explainer() {
         />
 
         <div className="flex w-full justify-end gap-2">
-          {!listening ? (
+          {/* {!listening ? (
             <button
               onClick={async (e) => {
                 e.preventDefault();
@@ -84,25 +84,31 @@ function Explainer() {
             >
               <X color="white" size={18} />
             </button>
-          )}
-          {/* <button
-            onClick={(e) => {
+          )} */}
+          <button
+            onClick={async (e) => {
               e.preventDefault();
 
               if (listening) {
-                SpeechRecognition.stopListening();
-                setInput((input) => input + transcript);
-                return;
-              }
+                await SpeechRecognition.stopListening();
 
-              resetTranscript();
-              SpeechRecognition.startListening({ continuous: true });
+                // Wait briefly to ensure final transcript is captured
+                setTimeout(() => {
+                  setInput((input) => input + " " + transcript.trim());
+                  resetTranscript(); // Optional: clean up after setting
+                }, 500);
+              } else {
+                resetTranscript();
+                SpeechRecognition.startListening({
+                  continuous: true,
+                });
+              }
             }}
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
           >
             {!listening && <Mic color="white" size={18} />}
             {listening && <X color="white" size={18} />}
-          </button> */}
+          </button>
 
           <button
             disabled={isPending || listening}
