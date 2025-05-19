@@ -64,10 +64,10 @@ function Explainer() {
         <div className="flex w-full justify-end gap-2">
           {!listening ? (
             <button
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.preventDefault();
                 resetTranscript();
-                SpeechRecognition.startListening({ continuous: true });
+                await SpeechRecognition.startListening({ continuous: true });
               }}
               className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
             >
@@ -75,11 +75,10 @@ function Explainer() {
             </button>
           ) : (
             <button
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.preventDefault();
-                SpeechRecognition.stopListening();
+                await SpeechRecognition.stopListening();
                 setInput((input) => input + transcript);
-                return;
               }}
               className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
             >
