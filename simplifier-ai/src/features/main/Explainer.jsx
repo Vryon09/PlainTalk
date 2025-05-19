@@ -81,14 +81,8 @@ function Explainer() {
             onClick={(e) => {
               e.preventDefault();
 
-              if (listening) {
-                SpeechRecognition.stopListening();
-                resetTranscript();
-                return;
-              }
-
               resetTranscript();
-              SpeechRecognition.startListening({ continuous: true });
+              SpeechRecognition.startListening();
             }}
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
           >
