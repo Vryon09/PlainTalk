@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { addExplained, getPrevExplained } from "../history/historySlice";
 import { useOutletContext } from "react-router-dom";
-import { Copy, Mic, X } from "lucide-react";
+import { AudioLines, Copy, Mic, X } from "lucide-react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -66,18 +66,13 @@ function Explainer() {
 
         <div className="flex w-full justify-end gap-2">
           <button
-            // onClick={(e) => {
-            //   e.preventDefault();
+            onClick={() => setInput("")}
+            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
+          >
+            <X color="white" size={18} />
+          </button>
 
-            //   if (listening) {
-            //     SpeechRecognition.stopListening();
-            //     setInput((input) => input + transcript);
-            //     return;
-            //   }
-
-            //   resetTranscript();
-            //   SpeechRecognition.startListening({ continuous: true });
-            // }}
+          <button
             onClick={(e) => {
               e.preventDefault();
 
@@ -87,7 +82,7 @@ function Explainer() {
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
           >
             {!listening && <Mic color="white" size={18} />}
-            {listening && <X color="white" size={18} />}
+            {listening && <AudioLines color="white" size={18} />}
           </button>
 
           <button
