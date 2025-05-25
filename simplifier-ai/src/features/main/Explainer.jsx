@@ -65,12 +65,14 @@ function Explainer() {
         />
 
         <div className="flex w-full justify-end gap-2">
-          <button
-            onClick={() => setInput("")}
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
-          >
-            <X color="white" size={18} />
-          </button>
+          {input !== "" && (
+            <button
+              onClick={() => setInput("")}
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
+            >
+              <X color="white" size={18} />
+            </button>
+          )}
 
           <button
             onClick={(e) => {
