@@ -107,7 +107,7 @@ function Explainer() {
                 e.preventDefault();
                 setIsContextOpen(true);
               }}
-              className="flex cursor-pointer items-center justify-center rounded bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700 active:bg-indigo-700 disabled:cursor-not-allowed"
+              className="flex cursor-pointer items-center justify-center rounded bg-indigo-600 px-4 py-2 text-xs text-white hover:bg-indigo-700 active:bg-indigo-700 disabled:cursor-not-allowed sm:text-sm"
             >
               + Context
             </button>
@@ -132,7 +132,7 @@ function Explainer() {
 
             <button
               disabled={isPending || listening}
-              className="cursor-pointer rounded bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700 active:bg-indigo-700 disabled:cursor-not-allowed"
+              className="cursor-pointer rounded bg-indigo-600 px-4 py-2 text-xs text-white hover:bg-indigo-700 active:bg-indigo-700 disabled:cursor-not-allowed sm:text-sm"
             >
               {isPending ? "Explaining..." : "Explain"}
             </button>
