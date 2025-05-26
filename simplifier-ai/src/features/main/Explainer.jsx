@@ -78,7 +78,7 @@ function Explainer() {
           )}
         </div>
 
-        <div className="m-4 flex items-center justify-between">
+        <div className="mb-4 flex items-center justify-between">
           {context !== "" ? (
             <div>
               <p className="text-xs text-neutral-600 sm:text-sm">Context:</p>
