@@ -136,7 +136,7 @@ function Explainer() {
               className="cursor-pointer rounded bg-indigo-600 px-4 py-2 text-xs text-white hover:bg-indigo-700 active:bg-indigo-700 disabled:cursor-not-allowed sm:text-sm"
             >
               {isPending ? (
-                <ThreeDots height="20px" width="20px" color="white" />
+                <ThreeDots height="16px" width="16px" color="white" />
               ) : (
                 "Explain"
               )}
