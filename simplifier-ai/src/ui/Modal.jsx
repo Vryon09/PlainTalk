@@ -18,7 +18,14 @@ const overlayStyles = {
   zIndex: 1000,
 };
 
-function Modal({ children, isOpen, onClose, onConfirm }) {
+function Modal({ children, isOpen, onClose, onConfirm, confirmColor = "red" }) {
+  const confirmBase = "cursor-pointer rounded-lg  px-4 py-2 text-neutral-50 ";
+
+  const confirmStyle = {
+    red: confirmBase + "bg-red-500 hover:bg-red-600",
+    green: confirmBase + "bg-green-500 hover:bg-green-600",
+  };
+
   if (!isOpen) return null;
 
   return createPortal(
@@ -42,7 +49,7 @@ function Modal({ children, isOpen, onClose, onConfirm }) {
               onConfirm();
               onClose();
             }}
-            className="cursor-pointer rounded-lg bg-red-500 px-4 py-2 text-neutral-50 hover:bg-red-600"
+            className={confirmStyle[confirmColor]}
           >
             Confirm
           </button>

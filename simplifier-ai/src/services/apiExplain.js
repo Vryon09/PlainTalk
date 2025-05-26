@@ -11,6 +11,7 @@ const handleExplain = async ({
   setOutput,
   historyOpen,
   setHistoryOpen,
+  context = "",
 }) => {
   if (input === "") return;
 
@@ -21,7 +22,7 @@ const handleExplain = async ({
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ input }),
+    body: JSON.stringify({ input, context }),
   });
 
   const data = await response.json();
