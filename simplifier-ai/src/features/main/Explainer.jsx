@@ -95,20 +95,6 @@ function Explainer() {
           </button>
         </div>
 
-        {/* {output && (
-          <div className="rounded bg-gray-100 p-2">
-            <h3 className="text-lg font-bold">Results:</h3>
-            <div className="space-y-2">
-              {formattedOutput(output).map((result, i) => (
-                <div key={i}>
-                  <p className="font-semibold">{result.split(":")[0]}:</p>
-                  <p>{result.split(":")[1]}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )} */}
-
         {output && <ReactMarkdown>{output}</ReactMarkdown>}
         {output && (
           <div className="flex w-full justify-end">
