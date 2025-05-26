@@ -12,6 +12,7 @@ import ReactMarkdown from "react-markdown";
 import { handleCopy } from "../../utils/helpers";
 import toast from "react-hot-toast";
 import Modal from "../../ui/Modal";
+import { Bars, Rings, ThreeDots } from "react-loader-spinner";
 // import { useGoogleSignIn } from "../../services/apiSignin";
 
 function Explainer() {
@@ -99,7 +100,7 @@ function Explainer() {
               className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700 sm:h-9 sm:w-9"
             >
               {!listening && <Mic color="white" size={16} />}
-              {listening && <AudioLines color="white" size={16} />}
+              {listening && <Bars color="white" width="16px" height="16px" />}
             </button>
 
             <button
@@ -134,7 +135,11 @@ function Explainer() {
               disabled={isPending || listening}
               className="cursor-pointer rounded bg-indigo-600 px-4 py-2 text-xs text-white hover:bg-indigo-700 active:bg-indigo-700 disabled:cursor-not-allowed sm:text-sm"
             >
-              {isPending ? "Explaining..." : "Explain"}
+              {isPending ? (
+                <ThreeDots height="20px" width="20px" color="white" />
+              ) : (
+                "Explain"
+              )}
             </button>
           </div>
         </div>
