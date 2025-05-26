@@ -29,7 +29,6 @@ const handleExplain = async ({
   console.log("API Response:");
   console.log(data);
   const message = data.choices?.[0]?.message?.content;
-  // console.log(message);
 
   setOutput(message || "No response received.");
 

@@ -31,11 +31,6 @@ function Explainer() {
     alert("Browser doesn't support speech recognition.");
   }
 
-  const handleInput = (e) => {
-    e.target.style.height = "auto";
-    e.target.style.height = e.target.scrollHeight + "px";
-  };
-
   function onExplain(e) {
     e.preventDefault();
     handleExplain({ input, setOutput, historyOpen, setHistoryOpen });
@@ -51,29 +46,35 @@ function Explainer() {
   return (
     <>
       <form onSubmit={onExplain} className="mx-auto max-w-2xl space-y-2">
-        <textarea
-          disabled={isPending || listening}
-          value={listening ? "" : input}
-          onInput={handleInput}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder={
-            listening
-              ? "Listening..."
-              : `${auth.currentUser ? `Hi ${auth.currentUser.displayName.split(" ")[0]}, ` : ""}Write a confusing or deep sentence you'd like me to simplify.`
-          }
-          className="w-full resize-none rounded-md border-1 border-neutral-400 p-2 outline-none focus:ring-2 focus:ring-indigo-600"
-        />
-
-        <div className="flex w-full justify-end gap-2">
+        <div className="relative">
+          <textarea
+            disabled={isPending || listening}
+            value={listening ? "" : input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={
+              listening
+                ? "Listening..."
+                : `${auth.currentUser ? `Hi ${auth.currentUser.displayName.split(" ")[0]}, ` : ""}Write a confusing or deep sentence you'd like me to simplify.`
+            }
+            className="min-h-20 w-full resize-none rounded-md border-1 border-neutral-400 p-2 pr-10 text-sm outline-none placeholder:text-sm focus:ring-2 focus:ring-indigo-600 sm:text-base sm:placeholder:text-base"
+          />
           {input !== "" && (
             <button
+              style={{
+                position: "absolute",
+                right: "6px",
+                top: "50%",
+                transform: "translate(0,-50%)",
+              }}
               onClick={() => setInput("")}
-              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
+              className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
             >
-              <X color="white" size={18} />
+              <X color="white" size={14} />
             </button>
           )}
+        </div>
 
+        <div className="flex w-full justify-end gap-2">
           <button
             onClick={(e) => {
               e.preventDefault();
