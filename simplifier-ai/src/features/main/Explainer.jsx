@@ -96,7 +96,7 @@ function Explainer() {
                 resetTranscript();
                 SpeechRecognition.startListening();
               }}
-              className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700 sm:h-10 sm:w-10"
+              className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700 sm:h-9 sm:w-9"
             >
               {!listening && <Mic color="white" size={16} />}
               {listening && <AudioLines color="white" size={16} />}
