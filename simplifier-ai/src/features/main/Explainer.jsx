@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { addExplained, getPrevExplained } from "../history/historySlice";
 import { useOutletContext } from "react-router-dom";
-import { AudioLines, Copy, Mic, X } from "lucide-react";
+import { Copy, Lightbulb, LightbulbOff, Mic, X } from "lucide-react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -12,7 +12,7 @@ import ReactMarkdown from "react-markdown";
 import { handleCopy } from "../../utils/helpers";
 import toast from "react-hot-toast";
 import Modal from "../../ui/Modal";
-import { Bars, Rings, ThreeDots } from "react-loader-spinner";
+import { Bars, ThreeDots } from "react-loader-spinner";
 // import { useGoogleSignIn } from "../../services/apiSignin";
 
 function Explainer() {
@@ -109,12 +109,21 @@ function Explainer() {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setIsContextOpen(true);
+                if (context === "") {
+                  setIsContextOpen(true);
+                  return;
+                }
+                setContext("");
               }}
-              className="flex h-10 cursor-pointer items-center justify-center rounded bg-indigo-600 px-4 text-xs text-white hover:bg-indigo-700 active:bg-indigo-700 disabled:cursor-not-allowed sm:text-sm"
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
             >
-              + Context
+              {context ? (
+                <LightbulbOff height="16px" color="white" />
+              ) : (
+                <Lightbulb height="16px" color="white" />
+              )}
             </button>
+
             <Modal
               isOpen={isContextOpen}
               onClose={() => setIsContextOpen(false)}
