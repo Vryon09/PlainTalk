@@ -114,6 +114,7 @@ function Explainer() {
                   return;
                 }
                 setContext("");
+                toast.success("Removed Context");
               }}
               className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
             >
@@ -130,6 +131,7 @@ function Explainer() {
               onConfirm={() => {
                 setContext(contextInput);
                 setContextInput("");
+                toast.success("Added Context");
               }}
               confirmColor="green"
             >

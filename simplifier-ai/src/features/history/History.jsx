@@ -19,11 +19,10 @@ function History({ setHistoryOpen, historyOpen, isMobile }) {
           ? {
               left: `${historyOpen ? 0 : "-100%"}`,
               transition: "0.5s",
-              position: "fixed",
             }
           : {}
       }
-      className="absolute top-0 left-0 z-20 flex h-[100dvh] w-full flex-col overflow-scroll border-r border-neutral-200 bg-neutral-100 p-4 transition duration-500 md:z-0 md:w-70"
+      className="fixed top-0 left-0 z-20 flex h-[100dvh] w-full flex-col overflow-scroll overflow-x-hidden border-r border-neutral-200 bg-neutral-100 p-4 transition duration-500 md:z-0 md:w-70"
     >
       <HideHistory onClick={() => setHistoryOpen(false)} />
 
