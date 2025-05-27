@@ -97,10 +97,13 @@ function Explainer() {
                 resetTranscript();
                 SpeechRecognition.startListening();
               }}
-              className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700 sm:h-9 sm:w-9"
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-[50%] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-700"
             >
-              {!listening && <Mic color="white" size={16} />}
-              {listening && <Bars color="white" width="16px" height="16px" />}
+              {!listening ? (
+                <Mic color="white" size="16px" />
+              ) : (
+                <Bars color="white" width="16px" height="16px" />
+              )}
             </button>
 
             <button
@@ -108,7 +111,7 @@ function Explainer() {
                 e.preventDefault();
                 setIsContextOpen(true);
               }}
-              className="flex cursor-pointer items-center justify-center rounded bg-indigo-600 px-4 py-2 text-xs text-white hover:bg-indigo-700 active:bg-indigo-700 disabled:cursor-not-allowed sm:text-sm"
+              className="flex h-10 cursor-pointer items-center justify-center rounded bg-indigo-600 px-4 text-xs text-white hover:bg-indigo-700 active:bg-indigo-700 disabled:cursor-not-allowed sm:text-sm"
             >
               + Context
             </button>
@@ -133,7 +136,7 @@ function Explainer() {
 
             <button
               disabled={isPending || listening}
-              className="cursor-pointer rounded bg-indigo-600 px-4 py-2 text-xs text-white hover:bg-indigo-700 active:bg-indigo-700 disabled:cursor-not-allowed sm:text-sm"
+              className="h-10 cursor-pointer rounded bg-indigo-600 px-4 text-xs text-white hover:bg-indigo-700 active:bg-indigo-700 disabled:cursor-not-allowed sm:text-sm"
             >
               {isPending ? (
                 <ThreeDots height="16px" width="16px" color="white" />
