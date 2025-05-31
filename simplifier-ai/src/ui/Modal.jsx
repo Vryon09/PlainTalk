@@ -23,7 +23,7 @@ function Modal({ children, isOpen, onClose, onConfirm, confirmColor = "red" }) {
 
   const confirmStyle = {
     red: confirmBase + "bg-red-500 hover:bg-red-600",
-    green: confirmBase + "bg-green-500 hover:bg-green-600",
+    green: confirmBase + "bg-emerald-500 hover:bg-emerald-600",
   };
 
   if (!isOpen) return null;

@@ -1,10 +1,17 @@
-import { X } from "lucide-react";
+import { Ellipsis } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDelete } from "../../services/apiHistory";
 import { useState } from "react";
 import Modal from "../../ui/Modal";
 
-function HistoryTab({ explained, setHistoryOpen, isMobile }) {
+function HistoryTab({
+  explained,
+  setHistoryOpen,
+  isMobile,
+  tabDropped,
+  setTabDropped,
+  dropdownRef,
+}) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -30,7 +37,7 @@ function HistoryTab({ explained, setHistoryOpen, isMobile }) {
 
   return (
     <div
-      className="group flex h-9 cursor-pointer items-center justify-between rounded-xl bg-neutral-200 p-2 hover:bg-neutral-300 active:bg-neutral-300"
+      className="group relative flex h-9 cursor-pointer items-center justify-between rounded-xl bg-neutral-200 p-2 hover:bg-neutral-300 active:bg-neutral-300"
       style={{
         backgroundColor: `${+historyId === explained.id ? "#d4d4d4" : ""}`,
         pointerEvents: `${isDeleting ? "none" : "auto"}`,
@@ -54,14 +61,41 @@ function HistoryTab({ explained, setHistoryOpen, isMobile }) {
         onClick={(e) => {
           e.stopPropagation();
 
-          setIsOpen(true);
+          setTabDropped(explained.id);
         }}
-        style={isMobile ? { display: "flex" } : {}}
+        disabled={tabDropped === explained.id}
+        style={
+          isMobile || tabDropped === explained.id ? { display: "flex" } : {}
+        }
         // className="hidden h-6 w-6 cursor-pointer items-center justify-center rounded-full transition-all duration-100 group-hover:flex hover:bg-neutral-400"
         className="hidden h-6 w-6 cursor-pointer items-center justify-center rounded-full transition-all duration-100 group-hover:flex hover:bg-neutral-400 active:bg-neutral-400"
       >
-        <X size={14} />
+        <Ellipsis size={14} />
       </button>
+
+      {tabDropped === explained.id && (
+        <div
+          onClick={(e) => e.stopPropagation()}
+          ref={dropdownRef}
+          style={{
+            position: "absolute",
+            right: "0",
+            bottom: "-70%",
+            transform: "translate(0, 70%)",
+          }}
+          className="z-20 rounded-2xl bg-neutral-500 px-2 py-4"
+        >
+          <div
+            onClick={() => setIsOpen(true)}
+            className="rounded-xl px-3 py-2 text-sm tracking-wide text-neutral-50 hover:bg-neutral-600"
+          >
+            Delete
+          </div>
+          <div className="rounded-xl px-3 py-2 text-sm tracking-wide text-neutral-50 hover:bg-neutral-600">
+            Add to Collection
+          </div>
+        </div>
+      )}
 
       <Modal
         isOpen={isOpen}

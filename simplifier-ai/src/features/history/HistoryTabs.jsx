@@ -1,35 +1,20 @@
-import HistoryTab from "./HistoryTab";
+import Collections from "./Collections";
 import LogoTab from "./LogoTab";
+import RecentHistory from "./RecentHistory";
 
 function HistoryTabs({ isMobile, setHistoryOpen, isPending, prevExplained }) {
   return (
     <div>
       <LogoTab isMobile={isMobile} setHistoryOpen={setHistoryOpen} />
 
-      <p className="pt-4 text-sm font-semibold text-neutral-500">
-        Recent History
-      </p>
+      <Collections isMobile={isMobile} />
 
-      <div className="flex flex-col-reverse gap-1 py-2">
-        {isPending && (
-          <p className="mt-2 text-center text-neutral-400">Loading...</p>
-        )}
-
-        {!isPending && !prevExplained.length && (
-          <p className="mt-2 text-center text-neutral-400">No history here</p>
-        )}
-
-        {!isPending &&
-          prevExplained.length > 0 &&
-          prevExplained.map((explained) => (
-            <HistoryTab
-              isMobile={isMobile}
-              setHistoryOpen={setHistoryOpen}
-              key={explained.id}
-              explained={explained}
-            />
-          ))}
-      </div>
+      <RecentHistory
+        isMobile={isMobile}
+        setHistoryOpen={setHistoryOpen}
+        isPending={isPending}
+        prevExplained={prevExplained}
+      />
     </div>
   );
 }

@@ -129,6 +129,10 @@ function Explainer() {
               isOpen={isContextOpen}
               onClose={() => setIsContextOpen(false)}
               onConfirm={() => {
+                if (contextInput === "") {
+                  toast.error("Missing input.");
+                  return;
+                }
                 setContext(contextInput);
                 setContextInput("");
                 toast.success("Added Context");
