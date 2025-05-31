@@ -139,14 +139,16 @@ function Explainer() {
               }}
               confirmColor="green"
             >
-              <p>Add Context</p>
-              <input
-                className="rounded-md border-1 border-neutral-600 p-2"
-                type="text"
-                placeholder="Ex. Atomic Habits"
-                onChange={(e) => setContextInput(e.target.value)}
-                value={contextInput}
-              />
+              <div className="flex flex-col gap-2">
+                <label>Enter your context:</label>
+                <input
+                  className="rounded-md border-1 border-neutral-600 p-2"
+                  type="text"
+                  placeholder="Ex. Atomic Habits"
+                  onChange={(e) => setContextInput(e.target.value)}
+                  value={contextInput}
+                />
+              </div>
             </Modal>
 
             <button

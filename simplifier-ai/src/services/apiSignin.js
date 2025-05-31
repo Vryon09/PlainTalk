@@ -16,6 +16,7 @@ async function handleGoogleSignIn() {
       photoURL: user.photoURL,
       uid: user.uid,
       explained: [],
+      collections: [],
     });
   }
 
