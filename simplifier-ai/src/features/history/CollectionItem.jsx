@@ -1,8 +1,16 @@
 import { X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function CollectionItem({ isMobile, explained }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="group flex h-9 cursor-pointer items-center justify-between rounded-xl bg-neutral-200 p-2 hover:bg-neutral-300 active:bg-neutral-300">
+    <div
+      onClick={() => {
+        navigate(`/main/history/${explained.id}`);
+      }}
+      className="group flex h-9 cursor-pointer items-center justify-between rounded-xl bg-neutral-200 p-2 hover:bg-neutral-300 active:bg-neutral-300"
+    >
       <p className="text-sm">
         {explained.statement.length > 20
           ? explained.statement.slice(0, 20).trim() + "..."

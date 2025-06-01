@@ -1,5 +1,6 @@
 import { ChevronDown, ChevronUp, Folder, X } from "lucide-react";
 import { useState } from "react";
+import CollectionItem from "./CollectionItem";
 
 function Collection({ isMobile, collection }) {
   const [isDropped, setIsDropped] = useState(false);
@@ -18,7 +19,17 @@ function Collection({ isMobile, collection }) {
         </button>
       </div>
 
-      {isDropped && <div className="space-y-1"></div>}
+      {isDropped && (
+        <div className="space-y-1">
+          {collection.explained.map((explained, i) => (
+            <CollectionItem
+              key={explained.id}
+              isMobile={isMobile}
+              explained={explained}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

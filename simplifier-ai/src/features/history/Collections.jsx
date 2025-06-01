@@ -2,16 +2,11 @@ import { Plus } from "lucide-react";
 import Collection from "./Collection";
 import { useState } from "react";
 import Modal from "../../ui/Modal";
-import { getCollections, useAddCollection } from "../../services/apiHistory";
-import { useQuery } from "@tanstack/react-query";
+import { useAddCollection } from "../../services/apiHistory";
 
-function Collections({ isMobile }) {
+function Collections({ isMobile, collections, isPending }) {
   const [isAddingNew, setIsAddingNew] = useState(false);
   const [collectionNameInput, setCollectionNameInput] = useState("");
-  const { data: collections, isPending } = useQuery({
-    queryKey: ["collections"],
-    queryFn: getCollections,
-  });
   const { mutate: handleAddCollection } = useAddCollection();
 
   function onAddCollection() {
@@ -23,12 +18,14 @@ function Collections({ isMobile }) {
     <div>
       <div className="mt-4 flex items-center justify-between text-neutral-500">
         <p className="text-sm font-semibold">Collections</p>
-        <button
-          onClick={() => setIsAddingNew(true)}
-          className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full transition-all duration-100 group-hover:flex hover:bg-neutral-200 active:bg-neutral-200"
-        >
-          <Plus size={16} />
-        </button>
+        {!isPending && (
+          <button
+            onClick={() => setIsAddingNew(true)}
+            className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full transition-all duration-100 group-hover:flex hover:bg-neutral-200 active:bg-neutral-200"
+          >
+            <Plus size={16} />
+          </button>
+        )}
       </div>
 
       <div className="space-y-1 py-2">
@@ -51,7 +48,7 @@ function Collections({ isMobile }) {
           isOpen={isAddingNew}
           onClose={() => setIsAddingNew(false)}
           onConfirm={onAddCollection}
-          confirmColor="green"
+          confirmColor={"green"}
         >
           <div className="flex flex-col gap-2">
             <label>Enter Collection Name:</label>

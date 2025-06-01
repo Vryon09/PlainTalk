@@ -1,8 +1,12 @@
 import { Ellipsis } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDelete } from "../../services/apiHistory";
+import {
+  useAddExplainToCollection,
+  useDelete,
+} from "../../services/apiHistory";
 import { useState } from "react";
 import Modal from "../../ui/Modal";
+import toast from "react-hot-toast";
 
 function HistoryTab({
   explained,
@@ -11,14 +15,21 @@ function HistoryTab({
   tabDropped,
   setTabDropped,
   dropdownRef,
+  collections,
+  collectionsLoading,
+  selectedCollection,
+  setSelectedCollection,
 }) {
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isAddToCollectionModalOpen, setIsAddToCollectionModalOpen] =
+    useState(false);
   const navigate = useNavigate();
 
   const { historyId } = useParams();
 
   const { mutate: handleDelete } = useDelete();
+  const { mutate: handleAddExplainToCollection } = useAddExplainToCollection();
 
   function onDelete() {
     setIsDeleting(true);
@@ -26,6 +37,14 @@ function HistoryTab({
       navigate("/main/explainer");
     }
     handleDelete(explained);
+  }
+
+  function onAddExplainToCollection() {
+    if (selectedCollection === "") {
+      toast.error("You did not select a category");
+      return;
+    }
+    handleAddExplainToCollection({ explained, selectedCollection });
   }
 
   if (isDeleting)
@@ -86,23 +105,55 @@ function HistoryTab({
           className="z-20 rounded-2xl bg-neutral-500 px-2 py-4"
         >
           <div
-            onClick={() => setIsOpen(true)}
+            onClick={() => setIsDeleteModalOpen(true)}
             className="rounded-xl px-3 py-2 text-sm tracking-wide text-neutral-50 hover:bg-neutral-600"
           >
             Delete
           </div>
-          <div className="rounded-xl px-3 py-2 text-sm tracking-wide text-neutral-50 hover:bg-neutral-600">
+          <div
+            onClick={() => setIsAddToCollectionModalOpen(true)}
+            className="rounded-xl px-3 py-2 text-sm tracking-wide text-neutral-50 hover:bg-neutral-600"
+          >
             Add to Collection
           </div>
         </div>
       )}
 
       <Modal
-        isOpen={isOpen}
+        isOpen={isDeleteModalOpen}
         onConfirm={onDelete}
-        onClose={() => setIsOpen(false)}
+        onClose={() => setIsDeleteModalOpen(false)}
       >
         Are you sure you want to delete this item?
+      </Modal>
+
+      <Modal
+        isOpen={isAddToCollectionModalOpen}
+        onClose={() => setIsAddToCollectionModalOpen(false)}
+        onConfirm={onAddExplainToCollection}
+        confirmColor="green"
+      >
+        <div className="flex flex-col gap-2">
+          <label>Select collection:</label>
+          <div className="rounded-xl border-1 p-2">
+            {!collectionsLoading && (
+              <select
+                value={selectedCollection}
+                onChange={(e) => setSelectedCollection(e.target.value)}
+                className="w-full cursor-pointer outline-none"
+              >
+                <option value="" disabled>
+                  Select Category
+                </option>
+                {collections.map((collection, i) => (
+                  <option key={i} value={collection.name.toLowerCase()}>
+                    {collection.name}
+                  </option>
+                ))}
+              </select>
+            )}
+          </div>
+        </div>
       </Modal>
     </div>
   );

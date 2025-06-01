@@ -1,8 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import HistoryTab from "./HistoryTab";
 
-function RecentHistory({ isPending, prevExplained, isMobile, setHistoryOpen }) {
+function RecentHistory({
+  isPending,
+  prevExplained,
+  isMobile,
+  setHistoryOpen,
+  collections,
+  collectionsLoading,
+}) {
   const [tabDropped, setTabDropped] = useState(null);
+  const [selectedCollection, setSelectedCollection] = useState("");
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -44,6 +52,10 @@ function RecentHistory({ isPending, prevExplained, isMobile, setHistoryOpen }) {
               explained={explained}
               dropdownRef={dropdownRef}
               key={explained.id}
+              collections={collections}
+              collectionsLoading={collectionsLoading}
+              selectedCollection={selectedCollection}
+              setSelectedCollection={setSelectedCollection}
             />
           ))}
       </div>
