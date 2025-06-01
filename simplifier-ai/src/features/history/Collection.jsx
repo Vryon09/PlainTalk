@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronUp, Folder } from "lucide-react";
 import { useState } from "react";
-import CollectionItem from "./CollectionItem";
+import CollectionTab from "./CollectionTab";
 
 function Collection({ isMobile, collection, setHistoryOpen }) {
   const [isDropped, setIsDropped] = useState(false);
@@ -22,11 +22,12 @@ function Collection({ isMobile, collection, setHistoryOpen }) {
       {isDropped && (
         <div className="space-y-1">
           {collection.explained.map((explained) => (
-            <CollectionItem
+            <CollectionTab
               key={explained.id}
               isMobile={isMobile}
               explained={explained}
               setHistoryOpen={setHistoryOpen}
+              collection={collection}
             />
           ))}
         </div>

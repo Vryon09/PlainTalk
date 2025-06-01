@@ -6,6 +6,7 @@ import Explainer from "./features/main/Explainer";
 import HistoryItem from "./features/history/HistoryItem";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import CollectionItem from "./features/history/CollectionItem";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
         children: [
           { element: <Explainer />, path: "explainer" },
           { element: <HistoryItem />, path: "history/:historyId" },
+          {
+            element: <CollectionItem />,
+            path: "collection/:collectionName/:explainedId",
+          },
         ],
       },
     ],

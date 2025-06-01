@@ -112,7 +112,18 @@ async function handleAddExplainToCollection({ explained, selectedCollection }) {
       collection.name.toLowerCase() === selectedCollection.toLowerCase()
         ? {
             ...collection,
-            explained: [...collection.explained, explained],
+            explained: [
+              ...collection.explained,
+              {
+                ...explained,
+                id:
+                  collection.explained?.length > 0
+                    ? collection.explained[collection.explained.length - 1].id +
+                      1
+                    : 0,
+                createdAt: new Date(),
+              },
+            ],
           }
         : collection,
     );
@@ -134,4 +145,21 @@ export function useAddExplainToCollection() {
       });
     }, //to refetch asap
   });
+}
+
+export async function getExplainedByNameAndId({ collectionName, explainedId }) {
+  const userRef = doc(database, "users", auth.currentUser.uid);
+  const userSnap = await getDoc(userRef);
+
+  if (userSnap.exists()) {
+    const data = userSnap.data();
+
+    const explained = data.collections
+      .find((collection) => collection.name === collectionName)
+      .explained.find((item) => item.id === +explainedId);
+
+    return explained || {};
+  } else {
+    return {};
+  }
 }
