@@ -1,12 +1,19 @@
 import { X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-function CollectionItem({ isMobile, explained }) {
+function CollectionItem({ isMobile, explained, setHistoryOpen }) {
   const navigate = useNavigate();
+  const { historyId } = useParams();
 
   return (
     <div
+      style={{
+        backgroundColor: `${+historyId === explained.id ? "#d4d4d4" : ""}`,
+      }}
       onClick={() => {
+        if (isMobile) {
+          setHistoryOpen(false);
+        }
         navigate(`/main/history/${explained.id}`);
       }}
       className="group flex h-9 cursor-pointer items-center justify-between rounded-xl bg-neutral-200 p-2 hover:bg-neutral-300 active:bg-neutral-300"

@@ -18,6 +18,7 @@ function HistoryTabs({ isMobile, setHistoryOpen, isPending, prevExplained }) {
         isMobile={isMobile}
         collections={collections}
         isPending={collectionsLoading}
+        setHistoryOpen={setHistoryOpen}
       />
 
       <RecentHistory

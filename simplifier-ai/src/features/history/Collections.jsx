@@ -4,7 +4,7 @@ import { useState } from "react";
 import Modal from "../../ui/Modal";
 import { useAddCollection } from "../../services/apiHistory";
 
-function Collections({ isMobile, collections, isPending }) {
+function Collections({ isMobile, collections, isPending, setHistoryOpen }) {
   const [isAddingNew, setIsAddingNew] = useState(false);
   const [collectionNameInput, setCollectionNameInput] = useState("");
   const { mutate: handleAddCollection } = useAddCollection();
@@ -41,7 +41,12 @@ function Collections({ isMobile, collections, isPending }) {
 
         {collections?.length > 0 &&
           collections.map((collection, i) => (
-            <Collection key={i} collection={collection} isMobile={isMobile} />
+            <Collection
+              key={i}
+              collection={collection}
+              isMobile={isMobile}
+              setHistoryOpen={setHistoryOpen}
+            />
           ))}
 
         <Modal
