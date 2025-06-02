@@ -33,7 +33,7 @@ function HistoryTab({
 
   function onDelete() {
     setIsDeleting(true);
-    if (explained.id === +historyId) {
+    if (explained.id === historyId) {
       navigate("/main/explainer");
     }
     handleDelete(explained);
@@ -49,7 +49,12 @@ function HistoryTab({
 
   if (isDeleting)
     return (
-      <div className="flex h-9 cursor-pointer items-center justify-between rounded-xl bg-neutral-200 p-2">
+      <div
+        style={{
+          pointerEvents: `${isDeleting ? "none" : "auto"}`,
+        }}
+        className="flex h-9 cursor-pointer items-center justify-between rounded-xl bg-neutral-200 p-2"
+      >
         <p className="text-sm">Deleting...</p>
       </div>
     );
@@ -58,8 +63,7 @@ function HistoryTab({
     <div
       className="group relative flex h-9 cursor-pointer items-center justify-between rounded-xl bg-neutral-200 p-2 hover:bg-neutral-300 active:bg-neutral-300"
       style={{
-        backgroundColor: `${+historyId === explained.id ? "#d4d4d4" : ""}`,
-        pointerEvents: `${isDeleting ? "none" : "auto"}`,
+        backgroundColor: `${historyId === explained.id ? "#d4d4d4" : ""}`,
       }}
       onClick={() => {
         if (isDeleting) return;

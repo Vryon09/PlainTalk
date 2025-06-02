@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { auth, database } from "./firebase";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
 
 const API_URL = import.meta.env.VITE_API_URL;
 // https://plaintalk-backend.onrender.com
@@ -48,11 +49,12 @@ const handleExplain = async ({
         statement: input,
         // result: formattedOutput(message),
         result: message,
-        id:
-          data.explained?.length > 0
-            ? data.explained[data.explained.length - 1].id + 1
-            : 0,
         createdAt: new Date(),
+        // id:
+        //   data.explained?.length > 0
+        //     ? data.explained[data.explained.length - 1].id + 1
+        //     : 0,
+        id: uuidv4(),
       };
 
       await updateDoc(userRef, {
@@ -96,7 +98,7 @@ export async function getExplainedById(id) {
     const data = userSnap.data();
 
     const explainedArr = data.explained;
-    const explained = explainedArr.find((explained) => explained.id === +id);
+    const explained = explainedArr.find((explained) => explained.id === id);
 
     return explained || {};
   } else {

@@ -116,11 +116,6 @@ async function handleAddExplainToCollection({ explained, selectedCollection }) {
               ...collection.explained,
               {
                 ...explained,
-                id:
-                  collection.explained?.length > 0
-                    ? collection.explained[collection.explained.length - 1].id +
-                      1
-                    : 0,
                 createdAt: new Date(),
               },
             ],
@@ -156,10 +151,50 @@ export async function getExplainedByNameAndId({ collectionName, explainedId }) {
 
     const explained = data.collections
       .find((collection) => collection.name === collectionName)
-      .explained.find((item) => item.id === +explainedId);
+      .explained.find((item) => item.id === explainedId);
 
     return explained || {};
   } else {
     return {};
   }
+}
+
+async function handleRemoveExplainedFromCollection({
+  collectionName,
+  explainedId,
+}) {
+  const userRef = doc(database, "users", auth.currentUser.uid);
+  const userSnap = await getDoc(userRef);
+
+  if (userSnap.exists()) {
+    const collectionsData = userSnap.data().collections;
+
+    const updatedCollections = collectionsData.map((collection) =>
+      collection.name.toLowerCase() === collectionName.toLowerCase()
+        ? {
+            ...collection,
+            explained: collection.explained.filter(
+              (item) => item.id !== explainedId,
+            ),
+          }
+        : collection,
+    );
+
+    await updateDoc(userRef, {
+      collections: updatedCollections,
+    });
+  }
+}
+
+export function useRemoveExplainedFromCollection() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: handleRemoveExplainedFromCollection,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["collections"],
+      });
+    }, //to refetch asap
+  });
 }
