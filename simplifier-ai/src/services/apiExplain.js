@@ -43,7 +43,7 @@ const handleExplain = async ({
     const userSnap = await getDoc(userRef);
 
     if (userSnap.exists()) {
-      const data = userSnap.data();
+      // const data = userSnap.data();
 
       const newExplained = {
         statement: input,

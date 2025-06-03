@@ -57,7 +57,10 @@ function CollectionTab({ isMobile, explained, setHistoryOpen, collection }) {
       </p>
 
       <button
-        onClick={() => setIsDeleteModalOpen(true)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsDeleteModalOpen(true);
+        }}
         style={isMobile ? { display: "flex" } : {}}
         className="hidden h-6 w-6 cursor-pointer items-center justify-center rounded-full transition-all duration-100 group-hover:flex hover:bg-neutral-400 active:bg-neutral-400"
       >

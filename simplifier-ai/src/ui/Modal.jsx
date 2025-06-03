@@ -32,6 +32,9 @@ function Modal({ children, isOpen, onClose, onConfirm, confirmColor = "red" }) {
     <>
       <div style={overlayStyles}></div>
       <div
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
         style={modalStyles}
         className="flex flex-col gap-6 rounded-2xl bg-neutral-50 px-4 py-6"
       >

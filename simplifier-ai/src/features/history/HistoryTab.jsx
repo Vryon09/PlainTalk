@@ -65,7 +65,9 @@ function HistoryTab({
       style={{
         backgroundColor: `${historyId === explained.id ? "#d4d4d4" : ""}`,
       }}
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation();
+
         if (isDeleting) return;
 
         if (isMobile) {
@@ -106,17 +108,17 @@ function HistoryTab({
             bottom: "-70%",
             transform: "translate(0, 70%)",
           }}
-          className="z-20 rounded-2xl bg-neutral-500 px-2 py-4"
+          className="z-20 rounded-2xl bg-neutral-200 px-2 py-4"
         >
           <div
             onClick={() => setIsDeleteModalOpen(true)}
-            className="rounded-xl px-3 py-2 text-sm tracking-wide text-neutral-50 hover:bg-neutral-600"
+            className="rounded-xl px-3 py-2 text-sm tracking-wide hover:bg-neutral-300"
           >
             Delete
           </div>
           <div
             onClick={() => setIsAddToCollectionModalOpen(true)}
-            className="rounded-xl px-3 py-2 text-sm tracking-wide text-neutral-50 hover:bg-neutral-600"
+            className="rounded-xl px-3 py-2 text-sm tracking-wide hover:bg-neutral-300"
           >
             Add to Collection
           </div>
@@ -126,14 +128,18 @@ function HistoryTab({
       <Modal
         isOpen={isDeleteModalOpen}
         onConfirm={onDelete}
-        onClose={() => setIsDeleteModalOpen(false)}
+        onClose={() => {
+          setIsDeleteModalOpen(false);
+        }}
       >
         Are you sure you want to delete this item?
       </Modal>
 
       <Modal
         isOpen={isAddToCollectionModalOpen}
-        onClose={() => setIsAddToCollectionModalOpen(false)}
+        onClose={() => {
+          setIsAddToCollectionModalOpen(false);
+        }}
         onConfirm={onAddExplainToCollection}
         confirmColor="green"
       >
