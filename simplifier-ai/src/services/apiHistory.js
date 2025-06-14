@@ -198,3 +198,33 @@ export function useRemoveExplainedFromCollection() {
     }, //to refetch asap
   });
 }
+
+async function handleDeleteCollection(collectionName) {
+  const userRef = doc(database, "users", auth.currentUser.uid);
+  const userSnap = await getDoc(userRef);
+
+  if (userSnap.exists()) {
+    const collectionsData = userSnap.data().collections;
+
+    const updatedCollections = collectionsData.filter(
+      (collection) => collection.name !== collectionName,
+    );
+
+    await updateDoc(userRef, {
+      collections: updatedCollections,
+    });
+  }
+}
+
+export function useDeleteCollection() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: handleDeleteCollection,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["collections"],
+      });
+    }, //to refetch asap
+  });
+}
